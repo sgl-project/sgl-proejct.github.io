@@ -405,91 +405,115 @@
 <h1>Embedding Model<a class="headerlink" href="#Embedding-Model" title="Link to this heading">#</a></h1>
 <section id="Launch-A-Server">
 <h2>Launch A Server<a class="headerlink" href="#Launch-A-Server" title="Link to this heading">#</a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import subprocess</span>
-<span class="c1"># import time</span>
-<span class="c1"># import requests</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="c1"># # Equivalent to running this in the shell:</span>
-<span class="c1"># # python -m sglang.launch_server --model-path Alibaba-NLP/gte-Qwen2-7B-instruct --port 30010 --host 0.0.0.0 --is-embedding --log-level error</span>
-<span class="c1"># embedding_process = subprocess.Popen(</span>
-<span class="c1">#     [</span>
-<span class="c1">#         &quot;python&quot;,</span>
-<span class="c1">#         &quot;-m&quot;,</span>
-<span class="c1">#         &quot;sglang.launch_server&quot;,</span>
-<span class="c1">#         &quot;--model-path&quot;,</span>
-<span class="c1">#         &quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;,</span>
-<span class="c1">#         &quot;--port&quot;,</span>
-<span class="c1">#         &quot;30010&quot;,</span>
-<span class="c1">#         &quot;--host&quot;,</span>
-<span class="c1">#         &quot;0.0.0.0&quot;,</span>
-<span class="c1">#         &quot;--is-embedding&quot;,</span>
-<span class="c1">#         &quot;--log-level&quot;,</span>
-<span class="c1">#         &quot;error&quot;,</span>
-<span class="c1">#     ],</span>
-<span class="c1">#     text=True,</span>
-<span class="c1">#     stdout=subprocess.DEVNULL,</span>
-<span class="c1">#     stderr=subprocess.DEVNULL,</span>
-<span class="c1"># )</span>
+<span class="c1"># Equivalent to running this in the shell:</span>
+<span class="c1"># python -m sglang.launch_server --model-path Alibaba-NLP/gte-Qwen2-7B-instruct --port 30010 --host 0.0.0.0 --is-embedding --log-level error</span>
+<span class="n">embedding_process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;python&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sglang.launch_server&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--model-path&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--port&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;30010&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--host&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--is-embedding&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--log-level&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+    <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="c1"># while True:</span>
-<span class="c1">#     try:</span>
-<span class="c1">#         response = requests.get(</span>
-<span class="c1">#             &quot;http://localhost:30010/v1/models&quot;,</span>
-<span class="c1">#             headers={&quot;Authorization&quot;: &quot;Bearer None&quot;},</span>
-<span class="c1">#         )</span>
-<span class="c1">#         if response.status_code == 200:</span>
-<span class="c1">#             break</span>
-<span class="c1">#     except requests.exceptions.RequestException:</span>
-<span class="c1">#         time.sleep(1)</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;http://localhost:30010/v1/models&quot;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer None&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># print(&quot;Embedding server is ready. Proceeding with the next steps.&quot;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Embedding server is ready. Proceeding with the next steps.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Embedding server is ready. Proceeding with the next steps.
+</pre></div></div>
 </div>
 </section>
 <section id="Use-Curl">
 <h2>Use Curl<a class="headerlink" href="#Use-Curl" title="Link to this heading">#</a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Get the first 10 elements of the embedding</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first 10 elements of the embedding</span>
 
-<span class="c1"># ! curl -s http://localhost:30010/v1/embeddings \</span>
-<span class="c1">#   -H &quot;Content-Type: application/json&quot; \</span>
-<span class="c1">#   -H &quot;Authorization: Bearer None&quot; \</span>
-<span class="c1">#   -d &#39;{&quot;model&quot;: &quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;, &quot;input&quot;: &quot;Once upon a time&quot;}&#39; \</span>
-<span class="c1">#   | python3 -c &quot;import sys, json; print(json.load(sys.stdin)[&#39;data&#39;][0][&#39;embedding&#39;][:10])&quot;</span>
+<span class="o">!</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:30010/v1/embeddings<span class="w"> </span><span class="err">\</span>
+  <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> \
+  <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Authorization: Bearer None&quot;</span> \
+  <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;model&quot;: &quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;, &quot;input&quot;: &quot;Once upon a time&quot;}&#39;</span> \
+  <span class="o">|</span> <span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import sys, json; print(json.load(sys.stdin)[&#39;data&#39;][0][&#39;embedding&#39;][:10])&quot;</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.00830841064453125, 0.0006804466247558594, -0.00807952880859375, -0.000682830810546875, 0.01438140869140625, -0.009002685546875, 0.01239013671875, 0.0020999908447265625, 0.006214141845703125, -0.0030345916748046875]
+</pre></div></div>
 </div>
 </section>
 <section id="Using-OpenAI-Compatible-API">
 <h2>Using OpenAI Compatible API<a class="headerlink" href="#Using-OpenAI-Compatible-API" title="Link to this heading">#</a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import openai</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
 
-<span class="c1"># client = openai.Client(</span>
-<span class="c1">#     base_url=&quot;http://127.0.0.1:30010/v1&quot;, api_key=&quot;None&quot;</span>
-<span class="c1"># )</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://127.0.0.1:30010/v1&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;None&quot;</span>
+<span class="p">)</span>
 
-<span class="c1"># # Text embedding example</span>
-<span class="c1"># response = client.embeddings.create(</span>
-<span class="c1">#     model=&quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;,</span>
-<span class="c1">#     input=&quot;How are you today&quot;,</span>
-<span class="c1"># )</span>
+<span class="c1"># Text embedding example</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;</span><span class="p">,</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;How are you today&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="c1"># embedding = response.data[0].embedding[:10]</span>
-<span class="c1"># print(embedding)</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.006008148193359375, -0.0190582275390625, -0.01273345947265625, 0.01554107666015625, 0.0066986083984375, -0.013641357421875, 0.01134490966796875, 0.001377105712890625, -0.0089874267578125, 0.021697998046875]
+</pre></div></div>
 </div>
 </section>
 </section>
