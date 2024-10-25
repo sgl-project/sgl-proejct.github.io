@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Frontend: Structured Generation Language (SGLang) &#8212; SGLang</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/css/readthedocs.css?v=73f7402e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=24932e19"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ccdb6887"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'frontend';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Oct 24, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="SGLang - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="SGLang - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install SGLang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="send_request.html">Quick Start</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sampling_params.html">Sampling Parameters in SGLang Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperparameter_tuning.html">Guide on Hyperparameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_support.html">How to Support a New Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_guide.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choices_methods.html">Choices Methods in SGLang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark_and_profiling.html">Benchmark and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedding_model.html">Embedding Model</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/blob/main/docs/en/frontend.md?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/edit/main/docs/en/frontend.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/issues/new?title=Issue%20on%20page%20%2Ffrontend.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/frontend.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Frontend: Structured Generation Language (SGLang)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-local-models">Using Local Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-openai-models">Using OpenAI Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#language-feature">Language Feature</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow">Control Flow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelism">Parallelism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-modality">Multi-Modality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constrained-decoding">Constrained Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-decoding">JSON Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming">Streaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roles">Roles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-and-implementation-details">Tips and Implementation Details</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="frontend-structured-generation-language-sglang">
+<h1>Frontend: Structured Generation Language (SGLang)<a class="headerlink" href="#frontend-structured-generation-language-sglang" title="Link to this heading">#</a></h1>
+<p>The frontend language can be used with local models or API models. It is an alternative to the OpenAI API. You may found it easier to use for complex prompting workflow.</p>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<p>The example below shows how to use sglang to answer a mulit-turn question.</p>
+<section id="using-local-models">
+<h3>Using Local Models<a class="headerlink" href="#using-local-models" title="Link to this heading">#</a></h3>
+<p>First, launch a server with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">port</span> <span class="mi">30000</span>
+</pre></div>
+</div>
+<p>Then, connect to the server and answer a multi-turn question.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sglang</span> <span class="kn">import</span> <span class="n">function</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">assistant</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">set_default_backend</span><span class="p">,</span> <span class="n">RuntimeEndpoint</span>
+
+<span class="nd">@function</span>
+<span class="k">def</span> <span class="nf">multi_turn_question</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">question_1</span><span class="p">,</span> <span class="n">question_2</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">system</span><span class="p">(</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">user</span><span class="p">(</span><span class="n">question_1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">assistant</span><span class="p">(</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer_1&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">user</span><span class="p">(</span><span class="n">question_2</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">assistant</span><span class="p">(</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer_2&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+
+<span class="n">set_default_backend</span><span class="p">(</span><span class="n">RuntimeEndpoint</span><span class="p">(</span><span class="s2">&quot;http://localhost:30000&quot;</span><span class="p">))</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">multi_turn_question</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">question_1</span><span class="o">=</span><span class="s2">&quot;What is the capital of the United States?&quot;</span><span class="p">,</span>
+    <span class="n">question_2</span><span class="o">=</span><span class="s2">&quot;List two local attractions.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">messages</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;answer_1&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="using-openai-models">
+<h3>Using OpenAI Models<a class="headerlink" href="#using-openai-models" title="Link to this heading">#</a></h3>
+<p>Set the OpenAI API Key</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">OPENAI_API_KEY</span><span class="o">=</span><span class="n">sk</span><span class="o">-******</span>
+</pre></div>
+</div>
+<p>Then, answer a multi-turn question.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sglang</span> <span class="kn">import</span> <span class="n">function</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">assistant</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">set_default_backend</span><span class="p">,</span> <span class="n">OpenAI</span>
+
+<span class="nd">@function</span>
+<span class="k">def</span> <span class="nf">multi_turn_question</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">question_1</span><span class="p">,</span> <span class="n">question_2</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">system</span><span class="p">(</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">user</span><span class="p">(</span><span class="n">question_1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">assistant</span><span class="p">(</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer_1&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">user</span><span class="p">(</span><span class="n">question_2</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">assistant</span><span class="p">(</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer_2&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+
+<span class="n">set_default_backend</span><span class="p">(</span><span class="n">OpenAI</span><span class="p">(</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">))</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">multi_turn_question</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">question_1</span><span class="o">=</span><span class="s2">&quot;What is the capital of the United States?&quot;</span><span class="p">,</span>
+    <span class="n">question_2</span><span class="o">=</span><span class="s2">&quot;List two local attractions.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">messages</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;answer_1&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="more-examples">
+<h3>More Examples<a class="headerlink" href="#more-examples" title="Link to this heading">#</a></h3>
+<p>Anthropic and VertexAI (Gemini) models are also supported.
+You can find more examples at <a class="reference external" href="https://github.com/sgl-project/sglang/tree/main/examples/frontend_language/quick_start">examples/quick_start</a>.</p>
+</section>
+</section>
+<section id="language-feature">
+<h2>Language Feature<a class="headerlink" href="#language-feature" title="Link to this heading">#</a></h2>
+<p>To begin with, import sglang.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sglang</span> <span class="k">as</span> <span class="nn">sgl</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sglang</span></code> provides some simple primitives such as <code class="docutils literal notranslate"><span class="pre">gen</span></code>, <code class="docutils literal notranslate"><span class="pre">select</span></code>, <code class="docutils literal notranslate"><span class="pre">fork</span></code>, <code class="docutils literal notranslate"><span class="pre">image</span></code>.
+You can implement your prompt flow in a function decorated by <code class="docutils literal notranslate"><span class="pre">sgl.function</span></code>.
+You can then invoke the function with <code class="docutils literal notranslate"><span class="pre">run</span></code> or <code class="docutils literal notranslate"><span class="pre">run_batch</span></code>.
+The system will manage the state, chat template, parallelism and batching for you.</p>
+<p>The complete code for the examples below can be found at <a class="reference external" href="https://github.com/sgl-project/sglang/blob/main/examples/frontend_language/usage/readme_examples.py">readme_examples.py</a></p>
+<section id="control-flow">
+<h3>Control Flow<a class="headerlink" href="#control-flow" title="Link to this heading">#</a></h3>
+<p>You can use any Python code within the function body, including control flow, nested function calls, and external libraries.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">tool_use</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;To answer this question: &quot;</span> <span class="o">+</span> <span class="n">question</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;I need to use a &quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;calculator&quot;</span><span class="p">,</span> <span class="s2">&quot;search engine&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span>
+
+    <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;calculator&quot;</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;The math expression is&quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;expression&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;search engine&quot;</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;The key word to search is&quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallelism">
+<h3>Parallelism<a class="headerlink" href="#parallelism" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fork</span></code> to launch parallel prompts.
+Because <code class="docutils literal notranslate"><span class="pre">sgl.gen</span></code> is non-blocking, the for loop below issues two generation calls in parallel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">tip_suggestion</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;Here are two tips for staying healthy: &quot;</span>
+        <span class="s2">&quot;1. Balanced Diet. 2. Regular Exercise.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">forks</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">fork</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">forks</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Now, expand tip </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> into a paragraph:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;detailed_tip&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Tip 1:&quot;</span> <span class="o">+</span> <span class="n">forks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;detailed_tip&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Tip 2:&quot;</span> <span class="o">+</span> <span class="n">forks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;detailed_tip&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;In summary&quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-modality">
+<h3>Multi-Modality<a class="headerlink" href="#multi-modality" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sgl.image</span></code> to pass an image as input.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">image_qa</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">image_file</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="n">sgl</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span> <span class="o">+</span> <span class="n">question</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant</span><span class="p">(</span><span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="https://github.com/sgl-project/sglang/blob/main/examples/frontend_language/quick_start/local_example_llava_next.py">local_example_llava_next.py</a>.</p>
+</section>
+<section id="constrained-decoding">
+<h3>Constrained Decoding<a class="headerlink" href="#constrained-decoding" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">regex</span></code> to specify a regular expression as a decoding constraint.
+This is only supported for local models.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">regular_expression_gen</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Q: What is the IP address of the Google DNS servers?</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;A: &quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span>
+        <span class="s2">&quot;answer&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">regex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;((25[0-5]|2[0-4]\d|[01]?\d\d?).)</span><span class="si">{3}</span><span class="s2">(25[0-5]|2[0-4]\d|[01]?\d\d?)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="json-decoding">
+<h3>JSON Decoding<a class="headerlink" href="#json-decoding" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">regex</span></code> to specify a JSON schema with a regular expression.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">character_regex</span> <span class="o">=</span> <span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;\{\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;name&quot;: &quot;[\w\d\s]{1,16}&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;house&quot;: &quot;(Gryffindor|Slytherin|Ravenclaw|Hufflepuff)&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;blood status&quot;: &quot;(Pure-blood|Half-blood|Muggle-born)&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;occupation&quot;: &quot;(student|teacher|auror|ministry of magic|death eater|order of the phoenix)&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;wand&quot;: \{\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;        &quot;wood&quot;: &quot;[\w\d\s]{1,16}&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;        &quot;core&quot;: &quot;[\w\d\s]{1,16}&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;        &quot;length&quot;: [0-9]{1,2}\.[0-9]{0,2}\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    \},\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;alive&quot;: &quot;(Alive|Deceased)&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;patronus&quot;: &quot;[\w\d\s]{1,16}&quot;,\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;    &quot;bogart&quot;: &quot;[\w\d\s]{1,16}&quot;\n&quot;&quot;&quot;</span>
+    <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;\}&quot;&quot;&quot;</span>
+<span class="p">)</span>
+
+<span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">character_gen</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; is a character in Harry Potter. Please fill in the following information about this character.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;json_output&quot;</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">character_regex</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="https://github.com/sgl-project/sglang/blob/main/examples/frontend_language/usage/json_decode.py">json_decode.py</a> for an additional example of specifying formats with Pydantic models.</p>
+</section>
+<section id="batching">
+<h3>Batching<a class="headerlink" href="#batching" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">run_batch</span></code> to run a batch of requests with continuous batching.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">text_qa</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Q: &quot;</span> <span class="o">+</span> <span class="n">question</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;A:&quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">states</span> <span class="o">=</span> <span class="n">text_qa</span><span class="o">.</span><span class="n">run_batch</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of the United Kingdom?&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the capital of Japan?&quot;</span><span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">progress_bar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="streaming">
+<h3>Streaming<a class="headerlink" href="#streaming" title="Link to this heading">#</a></h3>
+<p>Add <code class="docutils literal notranslate"><span class="pre">stream=True</span></code> to enable streaming.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">text_qa</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Q: &quot;</span> <span class="o">+</span> <span class="n">question</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;A:&quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">text_qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">stream</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">text_iter</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="roles">
+<h3>Roles<a class="headerlink" href="#roles" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sgl.system</span></code>， <code class="docutils literal notranslate"><span class="pre">sgl.user</span></code> and <code class="docutils literal notranslate"><span class="pre">sgl.assistant</span></code> to set roles when using Chat models. You can also define more complex role prompts using begin and end tokens.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">chat_example</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">)</span>
+    <span class="c1"># Same as: s += s.system(&quot;You are a helpful assistant.&quot;)</span>
+
+    <span class="k">with</span> <span class="n">s</span><span class="o">.</span><span class="n">user</span><span class="p">():</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Question: What is the capital of France?&quot;</span>
+
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant_begin</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;Answer: &quot;</span> <span class="o">+</span> <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant_end</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="tips-and-implementation-details">
+<h3>Tips and Implementation Details<a class="headerlink" href="#tips-and-implementation-details" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">choices</span></code> argument in <code class="docutils literal notranslate"><span class="pre">sgl.gen</span></code> is implemented by computing the <a class="reference external" href="https://blog.eleuther.ai/multiple-choice-normalization/">token-length normalized log probabilities</a> of all choices and selecting the one with the highest probability.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">regex</span></code> argument in <code class="docutils literal notranslate"><span class="pre">sgl.gen</span></code> is implemented through autoregressive decoding with logit bias masking, according to the constraints set by the regex. It is compatible with <code class="docutils literal notranslate"><span class="pre">temperature=0</span></code> and <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">!=</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-local-models">Using Local Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-openai-models">Using OpenAI Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#language-feature">Language Feature</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow">Control Flow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelism">Parallelism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-modality">Multi-Modality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constrained-decoding">Constrained Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-decoding">JSON Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming">Streaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roles">Roles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-and-implementation-details">Tips and Implementation Details</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SGLang Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-2024, SGLang.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Oct 24, 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

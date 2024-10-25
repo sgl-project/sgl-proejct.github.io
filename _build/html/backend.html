@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Backend: SGLang Runtime (SRT) &#8212; SGLang</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/css/readthedocs.css?v=73f7402e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=24932e19"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=ccdb6887"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'backend';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Oct 24, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="SGLang - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="SGLang - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install SGLang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="send_request.html">Quick Start</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sampling_params.html">Sampling Parameters in SGLang Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperparameter_tuning.html">Guide on Hyperparameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_support.html">How to Support a New Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributor_guide.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choices_methods.html">Choices Methods in SGLang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark_and_profiling.html">Benchmark and Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedding_model.html">Embedding Model</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/blob/main/docs/en/backend.md?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/edit/main/docs/en/backend.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sgl-project/sglang/issues/new?title=Issue%20on%20page%20%2Fbackend.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/backend.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Backend: SGLang Runtime (SRT)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-compatible-api">OpenAI Compatible API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-server-arguments">Additional Server Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engine-without-http-server">Engine Without HTTP Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-models">Supported Models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-models-from-modelscope">Use Models From ModelScope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-llama-3-1-405b">Run Llama 3.1 405B</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-performance">Benchmark Performance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="backend-sglang-runtime-srt">
+<h1>Backend: SGLang Runtime (SRT)<a class="headerlink" href="#backend-sglang-runtime-srt" title="Link to this heading">#</a></h1>
+<p>The SGLang Runtime (SRT) is an efficient serving engine.</p>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<p>Launch a server</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">port</span> <span class="mi">30000</span>
+</pre></div>
+</div>
+<p>Send a request</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">30000</span><span class="o">/</span><span class="n">generate</span> \
+  <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> \
+  <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Once upon a time,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sampling_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;max_new_tokens&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>Learn more about the argument specification, streaming, and multi-modal support <a class="reference external" href="https://sglang.readthedocs.io/en/latest/sampling_params.html">here</a>.</p>
+</section>
+<section id="openai-compatible-api">
+<h2>OpenAI Compatible API<a class="headerlink" href="#openai-compatible-api" title="Link to this heading">#</a></h2>
+<p>In addition, the server supports OpenAI-compatible APIs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://127.0.0.1:30000/v1&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;EMPTY&quot;</span><span class="p">)</span>
+
+<span class="c1"># Text completion</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+	<span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+	<span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;The capital of France is&quot;</span><span class="p">,</span>
+	<span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+	<span class="n">max_tokens</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Chat completion</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a helpful AI assistant&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;List 3 countries and their capitals.&quot;</span><span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Text embedding</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;How are you today&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It supports streaming, vision, and almost all features of the Chat/Completions/Models/Batch endpoints specified by the <a class="reference external" href="https://platform.openai.com/docs/api-reference/">OpenAI API Reference</a>.</p>
+</section>
+<section id="additional-server-arguments">
+<h2>Additional Server Arguments<a class="headerlink" href="#additional-server-arguments" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To enable multi-GPU tensor parallelism, add <code class="docutils literal notranslate"><span class="pre">--tp</span> <span class="pre">2</span></code>. If it reports the error “peer access is not supported between these two devices”, add <code class="docutils literal notranslate"><span class="pre">--enable-p2p-check</span></code> to the server launch command.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">tp</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To enable multi-GPU data parallelism, add <code class="docutils literal notranslate"><span class="pre">--dp</span> <span class="pre">2</span></code>. Data parallelism is better for throughput if there is enough memory. It can also be used together with tensor parallelism. The following command uses 4 GPUs in total.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">dp</span> <span class="mi">2</span> <span class="o">--</span><span class="n">tp</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If you see out-of-memory errors during serving, try to reduce the memory usage of the KV cache pool by setting a smaller value of <code class="docutils literal notranslate"><span class="pre">--mem-fraction-static</span></code>. The default value is <code class="docutils literal notranslate"><span class="pre">0.9</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">mem</span><span class="o">-</span><span class="n">fraction</span><span class="o">-</span><span class="n">static</span> <span class="mf">0.7</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://sglang.readthedocs.io/en/latest/hyperparameter_tuning.html">hyperparameter tuning</a> on tuning hyperparameters for better performance.</p></li>
+<li><p>If you see out-of-memory errors during prefill for long prompts, try to set a smaller chunked prefill size.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">chunked</span><span class="o">-</span><span class="n">prefill</span><span class="o">-</span><span class="n">size</span> <span class="mi">4096</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To enable torch.compile acceleration, add <code class="docutils literal notranslate"><span class="pre">--enable-torch-compile</span></code>. It accelerates small models on small batch sizes. This does not work for FP8 currenly.</p></li>
+<li><p>To enable torchao quantization, add <code class="docutils literal notranslate"><span class="pre">--torchao-config</span> <span class="pre">int4wo-128</span></code>. It supports various quantization strategies.</p></li>
+<li><p>To enable fp8 weight quantization, add <code class="docutils literal notranslate"><span class="pre">--quantization</span> <span class="pre">fp8</span></code> on a fp16 checkpoint or directly load a fp8 checkpoint without specifying any arguments.</p></li>
+<li><p>To enable fp8 kv cache quantization, add <code class="docutils literal notranslate"><span class="pre">--kv-cache-dtype</span> <span class="pre">fp8_e5m2</span></code>.</p></li>
+<li><p>If the model does not have a chat template in the Hugging Face tokenizer, you can specify a <a class="reference external" href="https://sglang.readthedocs.io/en/latest/custom_chat_template.html">custom chat template</a>.</p></li>
+<li><p>To run tensor parallelism on multiple nodes, add <code class="docutils literal notranslate"><span class="pre">--nnodes</span> <span class="pre">2</span></code>. If you have two nodes with two GPUs on each node and want to run TP=4, let <code class="docutils literal notranslate"><span class="pre">sgl-dev-0</span></code> be the hostname of the first node and <code class="docutils literal notranslate"><span class="pre">50000</span></code> be an available port, you can use the following commands. If you meet deadlock, please try to add <code class="docutils literal notranslate"><span class="pre">--disable-cuda-graph</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Node 0</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">tp</span> <span class="mi">4</span> <span class="o">--</span><span class="n">nccl</span><span class="o">-</span><span class="n">init</span> <span class="n">sgl</span><span class="o">-</span><span class="n">dev</span><span class="o">-</span><span class="mi">0</span><span class="p">:</span><span class="mi">50000</span> <span class="o">--</span><span class="n">nnodes</span> <span class="mi">2</span> <span class="o">--</span><span class="n">node</span><span class="o">-</span><span class="n">rank</span> <span class="mi">0</span>
+
+<span class="c1"># Node 1</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">tp</span> <span class="mi">4</span> <span class="o">--</span><span class="n">nccl</span><span class="o">-</span><span class="n">init</span> <span class="n">sgl</span><span class="o">-</span><span class="n">dev</span><span class="o">-</span><span class="mi">0</span><span class="p">:</span><span class="mi">50000</span> <span class="o">--</span><span class="n">nnodes</span> <span class="mi">2</span> <span class="o">--</span><span class="n">node</span><span class="o">-</span><span class="n">rank</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="engine-without-http-server">
+<h2>Engine Without HTTP Server<a class="headerlink" href="#engine-without-http-server" title="Link to this heading">#</a></h2>
+<p>We also provide an inference engine <strong>without a HTTP server</strong>. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sglang</span> <span class="k">as</span> <span class="nn">sgl</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Hello, my name is&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;The president of the United States is&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;The capital of France is&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;The future of AI is&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">sampling_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">&quot;top_p&quot;</span><span class="p">:</span> <span class="mf">0.95</span><span class="p">}</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;meta-llama/Meta-Llama-3.1-8B-Instruct&quot;</span><span class="p">)</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">prompts</span><span class="p">,</span> <span class="n">sampling_params</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">prompts</span><span class="p">,</span> <span class="n">outputs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===============================&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prompt: </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="se">\n</span><span class="s2">Generated text: </span><span class="si">{</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This can be used for offline batch inference and building custom servers.
+You can view the full example <a class="reference external" href="https://github.com/sgl-project/sglang/tree/main/examples/runtime/engine">here</a>.</p>
+</section>
+<section id="supported-models">
+<h2>Supported Models<a class="headerlink" href="#supported-models" title="Link to this heading">#</a></h2>
+<p><strong>Generative Models</strong></p>
+<ul class="simple">
+<li><p>Llama / Llama 2 / Llama 3 / Llama 3.1</p></li>
+<li><p>Mistral / Mixtral / Mistral NeMo</p></li>
+<li><p>Gemma / Gemma 2</p></li>
+<li><p>Qwen / Qwen 2 / Qwen 2 MoE</p></li>
+<li><p>DeepSeek / DeepSeek 2</p></li>
+<li><p>OLMoE</p></li>
+<li><p><a class="reference external" href="https://llava-vl.github.io/blog/2024-08-05-llava-onevision/">LLaVA-OneVision</a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">sglang.launch_server</span> <span class="pre">--model-path</span> <span class="pre">lmms-lab/llava-onevision-qwen2-7b-ov</span> <span class="pre">--port=30000</span> <span class="pre">--chat-template=chatml-llava</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">sglang.launch_server</span> <span class="pre">--model-path</span> <span class="pre">lmms-lab/llava-onevision-qwen2-72b-ov</span> <span class="pre">--port=30000</span> <span class="pre">--tp-size=8</span> <span class="pre">--chat-template=chatml-llava</span></code></p></li>
+<li><p>Query the server with the <a class="reference external" href="https://platform.openai.com/docs/guides/vision">OpenAI Vision API</a>. See examples at <a class="reference external" href="https://github.com/sgl-project/sglang/blob/main/test/srt/test_vision_openai_server.py">test/srt/test_vision_openai_server.py</a></p></li>
+</ul>
+</li>
+<li><p>LLaVA 1.5 / 1.6 / NeXT</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">sglang.launch_server</span> <span class="pre">--model-path</span> <span class="pre">lmms-lab/llama3-llava-next-8b</span> <span class="pre">--port=30000</span> <span class="pre">--tp-size=1</span> <span class="pre">--chat-template=llava_llama_3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">sglang.launch_server</span> <span class="pre">--model-path</span> <span class="pre">lmms-lab/llava-next-72b</span> <span class="pre">--port=30000</span> <span class="pre">--tp-size=8</span> <span class="pre">--chat-template=chatml-llava</span></code></p></li>
+<li><p>Query the server with the <a class="reference external" href="https://platform.openai.com/docs/guides/vision">OpenAI Vision API</a>. See examples at <a class="reference external" href="https://github.com/sgl-project/sglang/blob/main/test/srt/test_vision_openai_server.py">test/srt/test_vision_openai_server.py</a></p></li>
+</ul>
+</li>
+<li><p>Yi-VL</p></li>
+<li><p>StableLM</p></li>
+<li><p>Command-R</p></li>
+<li><p>DBRX</p></li>
+<li><p>Grok</p></li>
+<li><p>ChatGLM</p></li>
+<li><p>InternLM 2</p></li>
+<li><p>Exaone 3</p></li>
+<li><p>BaiChuan2</p></li>
+<li><p>MiniCPM / MiniCPM 3</p></li>
+<li><p>XVERSE / XVERSE MoE</p></li>
+<li><p>SmolLM</p></li>
+</ul>
+<p><strong>Embedding Models</strong></p>
+<ul class="simple">
+<li><p>e5-mistral</p></li>
+<li><p>gte-Qwen2</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">sglang.launch_server</span> <span class="pre">--model-path</span> <span class="pre">Alibaba-NLP/gte-Qwen2-7B-instruct</span> <span class="pre">--is-embedding</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Instructions for supporting a new model are <a class="reference external" href="https://sglang.readthedocs.io/en/latest/model_support.html">here</a>.</p>
+<section id="use-models-from-modelscope">
+<h3>Use Models From ModelScope<a class="headerlink" href="#use-models-from-modelscope" title="Link to this heading">#</a></h3>
+<details>
+<summary>More</summary>
+<p>To use a model from <a class="reference external" href="https://www.modelscope.cn">ModelScope</a>, set the environment variable SGLANG_USE_MODELSCOPE.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">SGLANG_USE_MODELSCOPE</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>Launch <a class="reference external" href="https://www.modelscope.cn/models/qwen/qwen2-7b-instruct">Qwen2-7B-Instruct</a> Server</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SGLANG_USE_MODELSCOPE</span><span class="o">=</span><span class="n">true</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">launch_server</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">qwen</span><span class="o">/</span><span class="n">Qwen2</span><span class="o">-</span><span class="mi">7</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">port</span> <span class="mi">30000</span>
+</pre></div>
+</div>
+</details>
+</section>
+<section id="run-llama-3-1-405b">
+<h3>Run Llama 3.1 405B<a class="headerlink" href="#run-llama-3-1-405b" title="Link to this heading">#</a></h3>
+<details>
+<summary>More</summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run 405B (fp8) on a single node</span>
+python<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span>--model-path<span class="w"> </span>meta-llama/Meta-Llama-3.1-405B-Instruct-FP8<span class="w"> </span>--tp<span class="w"> </span><span class="m">8</span>
+
+<span class="c1"># Run 405B (fp16) on two nodes</span>
+<span class="c1">## on the first node, replace the `172.16.4.52:20000` with your own first node ip address and port</span>
+<span class="nv">GLOO_SOCKET_IFNAME</span><span class="o">=</span>eth0<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span>--model-path<span class="w"> </span>meta-llama/Meta-Llama-3.1-405B-Instruct<span class="w"> </span>--tp<span class="w"> </span><span class="m">16</span><span class="w"> </span>--nccl-init-addr<span class="w"> </span><span class="m">172</span>.16.4.52:20000<span class="w"> </span>--nnodes<span class="w"> </span><span class="m">2</span><span class="w"> </span>--node-rank<span class="w"> </span><span class="m">0</span><span class="w"> </span>--disable-cuda-graph
+
+<span class="c1">## on the first node, replace the `172.16.4.52:20000` with your own first node ip address and port</span>
+<span class="nv">GLOO_SOCKET_IFNAME</span><span class="o">=</span>eth0<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>sglang.launch_server<span class="w"> </span>--model-path<span class="w"> </span>meta-llama/Meta-Llama-3.1-405B-Instruct<span class="w"> </span>--tp<span class="w"> </span><span class="m">16</span><span class="w"> </span>--nccl-init-addr<span class="w"> </span><span class="m">172</span>.16.4.52:20000<span class="w"> </span>--nnodes<span class="w"> </span><span class="m">2</span><span class="w"> </span>--node-rank<span class="w"> </span><span class="m">1</span><span class="w"> </span>--disable-cuda-graph
+</pre></div>
+</div>
+</details>
+</section>
+</section>
+<section id="benchmark-performance">
+<h2>Benchmark Performance<a class="headerlink" href="#benchmark-performance" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Benchmark a single static batch by running the following command without launching a server. The arguments are the same as for <code class="docutils literal notranslate"><span class="pre">launch_server.py</span></code>.
+Note that this is not a dynamic batching server, so it may run out of memory for a batch size that a real server can handle.
+A real server truncates the prefill into several batches, while this unit test does not. For accurate large batch testing, please use <code class="docutils literal notranslate"><span class="pre">sglang.bench_serving</span></code> instead.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">bench_latency</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span> <span class="n">meta</span><span class="o">-</span><span class="n">llama</span><span class="o">/</span><span class="n">Meta</span><span class="o">-</span><span class="n">Llama</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">B</span><span class="o">-</span><span class="n">Instruct</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">32</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="nb">len</span> <span class="mi">256</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">len</span> <span class="mi">32</span>
+</pre></div>
+</div>
+</li>
+<li><p>Benchmark online serving. Launch a server first and run the following command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">sglang</span><span class="o">.</span><span class="n">bench_serving</span> <span class="o">--</span><span class="n">backend</span> <span class="n">sglang</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">prompt</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-compatible-api">OpenAI Compatible API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-server-arguments">Additional Server Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engine-without-http-server">Engine Without HTTP Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-models">Supported Models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-models-from-modelscope">Use Models From ModelScope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-llama-3-1-405b">Run Llama 3.1 405B</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-performance">Benchmark Performance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SGLang Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-2024, SGLang.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Oct 24, 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
