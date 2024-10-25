@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Choices Methods in SGLang &#8212; SGLang</title>
+    <title>Embedding Model &#8212; SGLang</title>
   
   
   
@@ -33,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="_static/css/readthedocs.css?v=73f7402e" />
   
   <!-- So that users can add custom icons -->
@@ -48,11 +49,12 @@
     <script src="_static/copybutton.js?v=ccdb6887"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'choices_methods';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'embedding_model';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Benchmark and Profiling" href="benchmark_and_profiling.html" />
-    <link rel="prev" title="Contributor Guide" href="contributor_guide.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.3.4.post1" />
@@ -160,10 +162,10 @@
 <li class="toctree-l1"><a class="reference internal" href="hyperparameter_tuning.html">Guide on Hyperparameter Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_support.html">How to Support a New Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributor_guide.html">Contributor Guide</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Choices Methods in SGLang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choices_methods.html">Choices Methods in SGLang</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmark_and_profiling.html">Benchmark and Profiling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="embedding_model.html">Embedding Model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Embedding Model</a></li>
 </ul>
 
     </div>
@@ -235,7 +237,7 @@
       
       
       
-      <li><a href="https://github.com/sgl-project/sglang/blob/main/docs/en/choices_methods.md?plain=1" target="_blank"
+      <li><a href="https://github.com/sgl-project/sglang/blob/main/docs/en/embedding_model.ipynb?plain=1" target="_blank"
    class="btn btn-sm btn-source-file-button dropdown-item"
    title="Show source"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -252,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/sgl-project/sglang/edit/main/docs/en/choices_methods.md" target="_blank"
+      <li><a href="https://github.com/sgl-project/sglang/edit/main/docs/en/embedding_model.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -269,7 +271,7 @@
       
       
       
-      <li><a href="https://github.com/sgl-project/sglang/issues/new?title=Issue%20on%20page%20%2Fchoices_methods.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sgl-project/sglang/issues/new?title=Issue%20on%20page%20%2Fembedding_model.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -299,7 +301,7 @@
       
       
       
-      <li><a href="_sources/choices_methods.md" target="_blank"
+      <li><a href="_sources/embedding_model.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +311,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -375,7 +377,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Choices Methods in SGLang</h1>
+    <h1>Embedding Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,12 +387,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#token-length-normalized">Token Length Normalized</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-token-selection">Greedy Token Selection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-likelihood-normalized">Unconditional Likelihood Normalized</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Launch-A-Server">Launch A Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-Curl">Use Curl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Using-OpenAI-Compatible-API">Using OpenAI Compatible API</a></li>
 </ul>
             </nav>
         </div>
@@ -402,77 +401,96 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="choices-methods-in-sglang">
-<h1>Choices Methods in SGLang<a class="headerlink" href="#choices-methods-in-sglang" title="Link to this heading">#</a></h1>
-<p>This doc describes the choices methods supported by SGLang.</p>
-<p>The optional <code class="docutils literal notranslate"><span class="pre">choices_method</span></code> arg determines how options supplied to SGLang’s <code class="docutils literal notranslate"><span class="pre">choices</span></code> primitive are selected. Only the <code class="docutils literal notranslate"><span class="pre">RuntimeEndpoint</span></code> backend supports the <code class="docutils literal notranslate"><span class="pre">choices_method</span></code> arg. Other backends, such as <code class="docutils literal notranslate"><span class="pre">OpenAI</span></code>, have bespoke selection implementations due to API limitations.</p>
-<section id="methods">
-<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
-<section id="token-length-normalized">
-<h3>Token Length Normalized<a class="headerlink" href="#token-length-normalized" title="Link to this heading">#</a></h3>
-<p>Token length normalized is the default SGLang choices method. It selects the option with the highest average logprob across all of its tokens.</p>
-<p>Usage example (alternatively, simply omit the <code class="docutils literal notranslate"><span class="pre">choices_method</span></code> arg):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">example</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant</span><span class="p">(</span>
-        <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span>
-            <span class="s2">&quot;answer&quot;</span><span class="p">,</span>
-            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">],</span>
-            <span class="n">choices_method</span><span class="o">=</span><span class="n">sgl</span><span class="o">.</span><span class="n">token_length_normalized</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+  <section id="Embedding-Model">
+<h1>Embedding Model<a class="headerlink" href="#Embedding-Model" title="Link to this heading">#</a></h1>
+<section id="Launch-A-Server">
+<h2>Launch A Server<a class="headerlink" href="#Launch-A-Server" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<p>This can perform poorly if an option contains many tokens, where its later tokens are predicted with high confidence based on its earlier tokens. For instance, even strong models will fail the above example if the specified options are <code class="docutils literal notranslate"><span class="pre">[&quot;Paris&quot;,</span> <span class="pre">&quot;Antidisestablishmentarianism&quot;]</span></code>.</p>
-</section>
-<section id="greedy-token-selection">
-<h3>Greedy Token Selection<a class="headerlink" href="#greedy-token-selection" title="Link to this heading">#</a></h3>
-<p>Greedy token selection simply selects the option with the highest logprob for its initial token. For overlapping options where one option is a subset of a longer option, the logprobs of the shorter option are extended using its average logprob for comparison against the longer option.</p>
-<p>Usage example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">example</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant</span><span class="p">(</span>
-        <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span>
-            <span class="s2">&quot;answer&quot;</span><span class="p">,</span>
-            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">],</span>
-            <span class="n">choices_method</span><span class="o">=</span><span class="n">sgl</span><span class="o">.</span><span class="n">greedy_token_selection</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import subprocess</span>
+<span class="c1"># import time</span>
+<span class="c1"># import requests</span>
+
+<span class="c1"># # Equivalent to running this in the shell:</span>
+<span class="c1"># # python -m sglang.launch_server --model-path Alibaba-NLP/gte-Qwen2-7B-instruct --port 30010 --host 0.0.0.0 --is-embedding --log-level error</span>
+<span class="c1"># embedding_process = subprocess.Popen(</span>
+<span class="c1">#     [</span>
+<span class="c1">#         &quot;python&quot;,</span>
+<span class="c1">#         &quot;-m&quot;,</span>
+<span class="c1">#         &quot;sglang.launch_server&quot;,</span>
+<span class="c1">#         &quot;--model-path&quot;,</span>
+<span class="c1">#         &quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;,</span>
+<span class="c1">#         &quot;--port&quot;,</span>
+<span class="c1">#         &quot;30010&quot;,</span>
+<span class="c1">#         &quot;--host&quot;,</span>
+<span class="c1">#         &quot;0.0.0.0&quot;,</span>
+<span class="c1">#         &quot;--is-embedding&quot;,</span>
+<span class="c1">#         &quot;--log-level&quot;,</span>
+<span class="c1">#         &quot;error&quot;,</span>
+<span class="c1">#     ],</span>
+<span class="c1">#     text=True,</span>
+<span class="c1">#     stdout=subprocess.DEVNULL,</span>
+<span class="c1">#     stderr=subprocess.DEVNULL,</span>
+<span class="c1"># )</span>
+
+<span class="c1"># while True:</span>
+<span class="c1">#     try:</span>
+<span class="c1">#         response = requests.get(</span>
+<span class="c1">#             &quot;http://localhost:30010/v1/models&quot;,</span>
+<span class="c1">#             headers={&quot;Authorization&quot;: &quot;Bearer None&quot;},</span>
+<span class="c1">#         )</span>
+<span class="c1">#         if response.status_code == 200:</span>
+<span class="c1">#             break</span>
+<span class="c1">#     except requests.exceptions.RequestException:</span>
+<span class="c1">#         time.sleep(1)</span>
+
+<span class="c1"># print(&quot;Embedding server is ready. Proceeding with the next steps.&quot;)</span>
 </pre></div>
 </div>
-<p>This can perform poorly if an option misleads the model down a bad path based on an attractive initial token. For instance, greedy selection will result in an incorrect response for this example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">us_president_example</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="s2">&quot;Name a US president.&quot;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant</span><span class="p">(</span>
-        <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span>
-            <span class="s2">&quot;answer&quot;</span><span class="p">,</span>
-            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Donald Duck&quot;</span><span class="p">,</span> <span class="s2">&quot;Millard Fillmore&quot;</span><span class="p">],</span>
-            <span class="n">choices_method</span><span class="o">=</span><span class="n">sgl</span><span class="o">.</span><span class="n">greedy_token_selection</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-</pre></div>
 </div>
 </section>
-<section id="unconditional-likelihood-normalized">
-<h3>Unconditional Likelihood Normalized<a class="headerlink" href="#unconditional-likelihood-normalized" title="Link to this heading">#</a></h3>
-<p>Unconditional likelihood normalized selects the option with the highest average token logprob once normalized by the unconditional token logprobs, as described in <a class="reference external" href="https://blog.eleuther.ai/multiple-choice-normalization/">this EleutherAI blogpost</a>. This method incurs an additional LLM call to obtain the unconditional likelihoods.</p>
-<p>Usage example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@sgl</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">example</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">user</span><span class="p">(</span><span class="s2">&quot;What is the capital of France?&quot;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">+=</span> <span class="n">sgl</span><span class="o">.</span><span class="n">assistant</span><span class="p">(</span>
-        <span class="n">sgl</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span>
-            <span class="s2">&quot;answer&quot;</span><span class="p">,</span>
-            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">],</span>
-            <span class="n">choices_method</span><span class="o">=</span><span class="n">sgl</span><span class="o">.</span><span class="n">unconditional_likelihood_normalized</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+<section id="Use-Curl">
+<h2>Use Curl<a class="headerlink" href="#Use-Curl" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Get the first 10 elements of the embedding</span>
+
+<span class="c1"># ! curl -s http://localhost:30010/v1/embeddings \</span>
+<span class="c1">#   -H &quot;Content-Type: application/json&quot; \</span>
+<span class="c1">#   -H &quot;Authorization: Bearer None&quot; \</span>
+<span class="c1">#   -d &#39;{&quot;model&quot;: &quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;, &quot;input&quot;: &quot;Once upon a time&quot;}&#39; \</span>
+<span class="c1">#   | python3 -c &quot;import sys, json; print(json.load(sys.stdin)[&#39;data&#39;][0][&#39;embedding&#39;][:10])&quot;</span>
+</pre></div>
+</div>
+</div>
 </section>
+<section id="Using-OpenAI-Compatible-API">
+<h2>Using OpenAI Compatible API<a class="headerlink" href="#Using-OpenAI-Compatible-API" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import openai</span>
+
+<span class="c1"># client = openai.Client(</span>
+<span class="c1">#     base_url=&quot;http://127.0.0.1:30010/v1&quot;, api_key=&quot;None&quot;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># # Text embedding example</span>
+<span class="c1"># response = client.embeddings.create(</span>
+<span class="c1">#     model=&quot;Alibaba-NLP/gte-Qwen2-7B-instruct&quot;,</span>
+<span class="c1">#     input=&quot;How are you today&quot;,</span>
+<span class="c1"># )</span>
+
+<span class="c1"># embedding = response.data[0].embedding[:10]</span>
+<span class="c1"># print(embedding)</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -488,22 +506,13 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="contributor_guide.html"
+       href="troubleshooting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Contributor Guide</p>
+        <p class="prev-next-title">Troubleshooting</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="benchmark_and_profiling.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Benchmark and Profiling</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -522,12 +531,9 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#token-length-normalized">Token Length Normalized</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-token-selection">Greedy Token Selection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-likelihood-normalized">Unconditional Likelihood Normalized</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Launch-A-Server">Launch A Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-Curl">Use Curl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Using-OpenAI-Compatible-API">Using OpenAI Compatible API</a></li>
 </ul>
   </nav></div>
 
